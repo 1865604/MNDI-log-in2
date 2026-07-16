@@ -2,42 +2,112 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>職員専用ページ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONDAI LIMITED 職員認証</title>
+
 <style>
 body{
-  font-family:sans-serif;
-  text-align:center;
-  margin-top:100px;
+    margin:0;
+    font-family:sans-serif;
+    background:#0f172a;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
+
+.login-box{
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+h1{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+p{
+    color:#cbd5e1;
+}
+
 input{
-  padding:10px;
+    width:90%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
 }
+
 button{
-  padding:10px 20px;
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+#error{
+    color:#ff6b6b;
+    margin-top:10px;
 }
 </style>
 </head>
+
 <body>
 
-<h2>職員専用ログイン</h2>
+<div class="login-box">
+    <h1>MONDAI LIMITED</h1>
+    <p>職員専用ページ</p>
 
-<input type="password" id="pass" placeholder="パスワード">
-<button onclick="login()">入室</button>
+    <input type="password" id="password" placeholder="パスワードを入力">
 
-<p id="msg" style="color:red;"></p>
+    <button onclick="login()">ログイン</button>
+
+    <div id="error"></div>
+</div>
 
 <script>
 function login(){
-  const password = "0065"; // 好きなパスワード
 
-  if(document.getElementById("pass").value === password){
-    window.location.href =
-      "https://sites.google.com/view/monndai-com/%E8%81%B7%E5%93%A1%E9%80%A3%E7%B5%A10065";
-  }else{
-    document.getElementById("msg").textContent =
-      "パスワードが違います";
-  }
+    const correctPassword = "0065";
+    const input = document.getElementById("password").value;
+
+    if(input === correctPassword){
+
+        document.getElementById("error").innerHTML =
+        "認証成功。移動しています...";
+
+        setTimeout(() => {
+            window.location.href =
+            "https://sites.google.com/view/monndai-com/0065";
+        }, 1000);
+
+    }else{
+
+        document.getElementById("error").innerHTML =
+        "パスワードが違います。";
+
+    }
 }
+
+// Enterキー対応
+document.getElementById("password").addEventListener("keypress", function(e){
+    if(e.key === "Enter"){
+        login();
+    }
+});
 </script>
 
 </body>
